@@ -1,0 +1,51 @@
+{% extends 'baseEtic.html.twig' %}
+{% block mainTitle %} Kategori Listesi{% endblock %}
+{% block body %}
+
+    <div class="row bg-title">
+        <!-- .page title -->
+        <div class="col-sm-4 col-xs-12">
+            {% if title is defined %}
+                <h4 class="page-title">{{ title }}</h4>
+            {% endif %}
+        </div>
+        <!-- /.page title -->
+        <!-- .breadcrumb -->
+        <div class="col-sm-4 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Anasayfa</a></li>
+                {% if title is defined %}
+                    <li class="active">{{ title }}</li>
+                {% endif %}
+            </ol>
+        </div>
+        <!-- /.breadcrumb -->
+        <div class="col-sm-4 col-xs-12 text-right">
+            <a href="./markaekle" class="btn btn-outline-info" title="Yeni Ürün Ekle"><i class="ti-plus"></i></a>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="white-box">
+            {% if cats|length > 0 %}
+                {% for cat in cats %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="./urunlistesi/marka/{{ cat.id }}">{{ cat.name }}</a>
+                        <span class="badge badge-primary badge-pill mr-auto ml-3">{{ cat.products|length }}</span>
+                        <div class="button-group">
+                            <a href="./markasil/{{ cat.id }}" class="btn btn-outline-danger" title="Sil"><i class="ti-trash"></i></a>
+                            <a href="./markaduzenle/{{ cat.id }}" class="btn btn-outline-success" title="Düzenle"><i class="ti-pencil-alt"></i></a>
+                        </div>
+                    </li>
+                {% endfor %}
+
+            {% else %}
+                <h2>Aradık taradık bulamadık.</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'baseEtic.html.twig' %}
+{% block mainTitle %} Ürün Listesi{% endblock %}
+{% block body %}
+
+    <div class="row bg-title">
+        <!-- .page title -->
+        <div class="col-sm-4 col-xs-12">
+            {% if title is defined %}
+                <h4 class="page-title">{{ title }}</h4>
+            {% endif %}
+        </div>
+        <!-- /.page title -->
+        <!-- .breadcrumb -->
+        <div class="col-sm-4 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Anasayfa</a></li>
+                {% if title is defined %}
+                    <li class="active">{{ title }}</li>
+                {% endif %}
+            </ol>
+        </div>
+        <!-- /.breadcrumb -->
+        <div class="col-sm-4 col-xs-12 text-right">
+            <a href="./urunekle" class="btn btn-info btn-rounded waves-effect" title="Yeni Ürün Ekle"><span class="btn-label"><i class="ti-plus"></i></span> Yeni Ekle</a>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="white-box">
+            {% if products|length > 0 %}
+                {% for product in products %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="./urun/{{ product.id }}" class="text-dark">{{ product.name }}</a>
+                        <span class="text-black-50">{{ product.category.name }}</span>
+                        <div class="button-group">
+                            <a href="./urunsil/{{ product.id }}" class="btn btn-outline-danger btn-circle waves-effect " title="Sil"><i class="ti-trash"></i></a>
+                            <a href="./urunduzenle/{{ product.id }}" class="btn btn-outline-success btn-circle waves-effect " title="Düzenle"><i class="ti-pencil-alt"></i></a>
+                        </div>
+                    </li>
+                {% endfor %}
+
+            {% else %}
+                <h2>Aradık taradık bulamadık.</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

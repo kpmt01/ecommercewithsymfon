@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>arayüz ?</h1>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Username: {{ app.user.username }}</p>
+    {% endif %}
+    <div class="container">
+    {% if product is defined  %}
+        {% for p in product %}
+            <div>
+                <p>Adı: {{ p.name }}</p>
+                <h6>Fiyatı: {{ p.getPrice }} TL</h6>
+                <h5>Markası: {{ p.getBrand.name }}</h5>
+                <h3>Kategorisi: {{ p.getCategory.name }}</h3>
+            </div>
+            <hr>
+        {% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

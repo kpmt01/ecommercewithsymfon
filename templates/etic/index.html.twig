@@ -1,0 +1,29 @@
+{% extends 'baseEtic.html.twig' %}
+{% block mainTitle %} Yönetim Paneli{% endblock %}
+{% block body %}
+
+    <div class="row pt-4">
+        {% if data|length > 0 %}
+            {% for d in data %}
+                <div class="col-3">
+                    <div class="white-box">
+                        <h3 class="box-title">{{ d.name }}</h3>
+                        <ul class="list-inline two-part">
+                            <li><i class="{{ d.icon }}"></i></li>
+                            <li class="text-right"><span class="counter">{{ d.count }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(".counter").counterUp({
+            delay: 100,
+            time: 1200
+        });
+    </script>
+{% endblock %}

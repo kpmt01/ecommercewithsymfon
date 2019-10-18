@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="http://localhost/deneme/public/index.php/">
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" >
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% include 'default/template/header.twig' %}
+        {% block body %}{% endblock %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

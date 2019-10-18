@@ -1,0 +1,187 @@
+{% extends 'baseEtic.html.twig' %}
+{% block mainTitle %} Yönetim Paneli{% endblock %}
+{% block body %}
+
+    <div class="row bg-title">
+        <!-- .page title -->
+        <div class="col-sm-4 col-xs-12">
+            {% if title is defined %}
+                <h4 class="page-title">{{ title }}</h4>
+            {% endif %}
+        </div>
+        <!-- /.page title -->
+        <!-- .breadcrumb -->
+        <div class="col-sm-4 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Anasayfa</a></li>
+                {% if title is defined %}
+                    <li class="active">{{ title }}</li>
+                {% endif %}
+            </ol>
+        </div>
+        <!-- /.breadcrumb -->
+        <div class="col-sm-4 col-xs-12 text-right">
+        </div>
+    </div>
+    <!-- .row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <div id="exampleValidator" class="wizard">
+                    <ul class="wizard-steps" role="tablist">
+                        <li class="active" role="tab">
+                            <h4><span><i class="ti-comment-alt"></i></span>Özet Bilgiler</h4>
+                        </li>
+                        <li role="tab">
+                            <h4><span><i class="ti-credit-card"></i></span>Fiyatlandırma</h4>
+                        </li>
+                        <li role="tab">
+                            <h4><span><i class="ti-image"></i></span>Özelleştirme</h4>
+                        </li>
+                    </ul>
+                    {{ form_start(form, {'attr': {'id': 'validation'}}) }}
+                        <div class="wizard-content">
+                            <div class="wizard-pane active" role="tabpanel">
+                                <div class="form-group">
+                                    {{ form_label(form.category) }}
+                                    {{ form_errors(form.category) }}
+                                    {{ form_widget(form.category) }}
+                                    {{ form_help(form.category) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.brand) }}
+                                    {{ form_errors(form.brand) }}
+                                    {{ form_widget(form.brand) }}
+                                    {{ form_help(form.brand) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.name) }}
+                                    {{ form_errors(form.name) }}
+                                    {{ form_widget(form.name) }}
+                                    {{ form_help(form.name) }}
+                                </div>
+                            </div>
+                            <div class="wizard-pane" role="tabpanel">
+                                <div class="form-group">
+                                    {{ form_label(form.price) }}
+                                    {{ form_errors(form.price) }}
+                                    {{ form_widget(form.price) }}
+                                    {{ form_help(form.price) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.quantity) }}
+                                    {{ form_errors(form.quantity) }}
+                                    {{ form_widget(form.quantity) }}
+                                    {{ form_help(form.quantity) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.discount) }}
+                                    {{ form_errors(form.discount) }}
+                                    {{ form_widget(form.discount) }}
+                                    {{ form_help(form.discount) }}
+                                </div>
+                            </div>
+                            <div class="wizard-pane" role="tabpanel">
+                                <div class="form-group">
+                                    {{ form_label(form.description) }}
+                                    {{ form_errors(form.description) }}
+                                    {{ form_widget(form.description) }}
+                                    {{ form_help(form.description) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.image) }}
+                                    {{ form_errors(form.image) }}
+                                    {{ form_widget(form.image) }}
+                                    {{ form_help(form.image) }}
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" name="submit" class="btn btn-outline">
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $('#exampleValidator').wizard({
+            onInit: function() {
+                $('#validation .btn[type="submit"]').hide();
+                $('#validation').formValidation({
+                    framework: 'bootstrap',
+                    fields: {
+                        "urun[category]": {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Lütfen Ürün Kategorisini Giriniz.'
+                                }
+                            }
+                        },
+                        "urun[name]": {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Lütfen Ürün Adını Giriniz.'
+                                }
+                            }
+                        },
+                        "urun[price]": {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Lütfen Ürün Fiyatını Giriniz.'
+                                },
+                                numeric: {
+                                    message: 'Lütfen Ürün Fiyatını Sayı Olarak Giriniz.'
+                                }
+                            }
+                        },
+                        "urun[quantity]": {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Lütfen Stok Adeti Belirtiniz Giriniz.'
+                                },
+                                numeric: {
+                                    message: 'Lütfen Ürün Adetini Sayı Olarak Giriniz.'
+                                }
+                            }
+                        },
+                        "urun[discount]": {
+                            validators: {
+                                numeric: {
+                                    message: 'Lütfen Ürün indirimini Sayı Olarak Giriniz.'
+                                }
+                            }
+                        }
+
+                    }
+                });
+            },
+            templates: {
+                buttons: function() {
+                    const options = this.options;
+                    return `<div class="text-right"><a class="wizard-back btn btn-success waves-effect waves-light text-white" href="#${this.id}" data-wizard="back" role="button"><span class="btn-label"><i class="fa fa-angle-left"></i></span>Önceki</a><a class="wizard-next btn btn-success waves-effect waves-light ml-3 text-white" href="#${this.id}" data-wizard="next" role="button">Sonraki<span class="btn-label-right"><i class="fa fa-angle-right"></i></span></a><a class="wizard-finish btn btn-success waves-effect waves-light ml-3 text-white" href="#${this.id}" data-wizard="finish" role="button">Bitir<span class="btn-label-right"><i class="fa fa-check"></i></span></a></div>`;
+                }
+            },
+            validator: function() {
+                var fv = $('#validation').data('formValidation');
+                var $this = $(this);
+                // Validate the container
+                fv.validateContainer($this);
+                var isValidStep = fv.isValidContainer($this);
+                if (isValidStep === false || isValidStep === null) {
+                    return false;
+                }
+                return true;
+            },
+            onFinish: function() {
+                $.post("keep.php", $("#validation").serialize()).done(function() {
+                    alert("hiiii");
+                });
+            }
+        });
+
+    </script>
+{% endblock %}
